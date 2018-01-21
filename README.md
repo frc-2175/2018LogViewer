@@ -1,1 +1,3 @@
-It's like "logic land", and it sounds like "Gogland". Hilarious
+# 2018 Log Viewer
+
+It views the logs!
