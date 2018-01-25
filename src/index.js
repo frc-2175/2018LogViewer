@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import App from './App';
+import './app.scss';
+
 ReactDOM.render(
-  <p>Hello, world!</p>,
+  <App />,
   document.getElementById('react-root')
 );
