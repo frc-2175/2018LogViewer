@@ -16,12 +16,16 @@ export default class MatchSlector extends React.Component {
 	render() {
 		let matches = this.state.matches;
 		matches = matches.map(element => {
-			return <option key={ element }>{ element }</option>;
+			return <option key={ element } value={ element }>{ element }</option>;
 		});
 		return (
-			<select>
+			<select onChange={ this.handleChange }>
 				{ matches }
 			</select>
 		);
+	}
+
+	handleChange = event => {
+		this.props.selectMatch(event.target.value);
 	}
 }

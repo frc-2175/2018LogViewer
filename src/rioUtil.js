@@ -20,7 +20,7 @@ export function getFolders() {
 export function getFiles(folderName) {
   if (FAKE) {
     return new Promise((resolve, reject) => {
-      switch folderName {
+      switch (folderName) {
         case '1':
           resolve(['talon.log']);
           break;
