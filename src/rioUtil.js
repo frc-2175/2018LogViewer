@@ -20,7 +20,20 @@ export function getFolders() {
 export function getFiles(folderName) {
   if (FAKE) {
     return new Promise((resolve, reject) => {
-      resolve(['talon.log', 'joystick.log']);
+      switch folderName {
+        case '1':
+          resolve(['talon.log']);
+          break;
+        case '2':
+          resolve(['talon.log', 'joystick.log']);
+          break;
+        case '3':
+          resolve(['talon.log', 'joystick.log', 'gyro.log']);
+          break;
+        default:
+          resolve(['nobody.log']);
+          break;
+      }
     });
   } else {
     return Axios.get(`/${folderName}`)
