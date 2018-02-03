@@ -45,15 +45,14 @@ export function getFiles(folderName) {
 
 export function getFile(folderName, fileName) {
   if (FAKE) {
-    const fakeData = `
-{"timestamp":10.0,"values":{"value":0.0}}
+    const fakeData = `{"timestamp":10.0,"values":{"value":0.0}}
 {"timestamp":10.1,"values":{"value":1.0}}
 {"timestamp":10.2,"values":{"value":0.0}}
 {"timestamp":10.3,"values":{"value":-1.0}}
-{"timestamp":10.4,"values":{"value":0.0}}
-`
+{"timestamp":10.4,"values":{"value":0.0}}`;
+
     return new Promise((resolve, reject) => {
-      resolve();
+      resolve(fakeData);
     });
   } else {
     return Axios.get(`/${folderName}/${fileName}`)

@@ -17,7 +17,12 @@ export default class LogFileSelector extends React.Component {
 	render() {
 		let files = this.state.files;
 		files = files.map(element => {
-			return <li key={ element }>{ element }</li>
+			return (
+				<div>
+					<input type="radio" key={ element } onClick={ () => this.selectFile(element) } name="files" id={ element } />
+					<label htmlFor={ element }>{ element }</label>
+				</div>
+			);
 		});
 		return (
 			<ul>
@@ -31,5 +36,9 @@ export default class LogFileSelector extends React.Component {
 			.then(files => {
 				this.setState({ files: files });
 			});
+	}
+
+	selectFile(file) {
+		this.props.selectFile(file);
 	}
 }

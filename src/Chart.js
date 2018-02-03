@@ -15,15 +15,8 @@ class Chart extends React.Component {
       type: 'line',
       data: {
         datasets: [{
-          label: '# of Foots',
-          data: [
-            { x: 0, y: 12 },
-            { x: 1, y: 5 },
-            { x: 2, y: 3 },
-            { x: 3, y: 5 },
-            { x: 4, y: 2 },
-            { x: 10, y: 3 },
-          ],
+          label: this.props.title,
+          data: this.props.data,
           showLine: true,
           fill: false,
           borderColor: 'rgba(255, 99, 132, 1)',
@@ -44,6 +37,11 @@ class Chart extends React.Component {
         },
       },
     });
+  }
+
+  componentDidUpdate() {
+    this.chart.data.datasets[0].data = this.props.data;
+    this.chart.update();
   }
 
   render() {
