@@ -22,16 +22,16 @@ export function getFiles(folderName) {
     return new Promise((resolve, reject) => {
       switch (folderName) {
         case '1':
-          resolve(['talon.log']);
+          resolve(['talon.data']);
           break;
         case '2':
-          resolve(['talon.log', 'joystick.log']);
+          resolve(['talon.data', 'joystick.data']);
           break;
         case '3':
-          resolve(['talon.log', 'joystick.log', 'gyro.log']);
+          resolve(['talon.data', 'joystick.data', 'gyro.data']);
           break;
         default:
-          resolve(['nobody.log']);
+          resolve(['nobody.data']);
           break;
       }
     });
@@ -44,15 +44,35 @@ export function getFiles(folderName) {
 }
 
 export function getFile(folderName, fileName) {
+  let values, name;
+  switch (fileName) {
+    case 'talon.data':
+      values = [0.0, 1.0, 0.0, -1.0, 0.0];
+      name = "output";
+      break;
+    case 'joystick.data':
+      values = [0.0, 0.5, 1.0, 0.5, 1.0];
+      name = "x";
+      break;
+    case 'gyro.data':
+      values = [0.0, 180.0, 90.0, 180.0, 45.0];
+      name = "zrotation";
+      break
+    default:
+      values = [0.0, 0.0, 0.0, 0.0, 0.0];
+      name = "none";
+      break;
+  }
+
   if (FAKE) {
-    const fakeData = `{"timestamp":10.0,"values":{"value":0.0}}
-{"timestamp":10.1,"values":{"value":1.0}}
-{"timestamp":10.2,"values":{"value":0.0}}
-{"timestamp":10.3,"values":{"value":-1.0}}
-{"timestamp":10.4,"values":{"value":0.0}}`;
+    const fakeData = `{"timestamp":10.0,"values":{"${name}":${values[0]}}}
+{"timestamp":10.1,"values":{"${name}":${values[1]}}}
+{"timestamp":10.2,"values":{"${name}":${values[2]}}}
+{"timestamp":10.3,"values":{"${name}":${values[3]}}}
+{"timestamp":10.4,"values":{"${name}":${values[4]}}}`;
 
     return new Promise((resolve, reject) => {
-      resolve(fakeData);
+      resolve({data: fakeData, name: name});
     });
   } else {
     return Axios.get(`/${folderName}/${fileName}`)

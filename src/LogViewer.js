@@ -25,11 +25,11 @@ export default class LogViewer extends React.Component {
 	updateChart = () => {
 		let file = getFile(this.props.folderName, this.props.fileName)
 			.then(file => {
-				let lines = file.split('\n');
+				let lines = file.data.split('\n');
 				let objects = lines.map(element => JSON.parse(element));
 				let points = objects.map(element => {
 					console.log('x: ' + element.timestamp + ', y: ' + element.values.value);
-					return { x: element.timestamp, y: element.values.value };
+					return { x: element.timestamp, y: element.values[file.name] };
 				});
 				this.setState({ points: points });
 			});
