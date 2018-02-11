@@ -18,8 +18,8 @@ export default class LogFileSelector extends React.Component {
 		let files = this.state.files;
 		files = files.map(element => {
 			return (
-				<div>
-					<input type="radio" key={ element } onClick={ () => this.selectFile(element) } name="files" id={ element } />
+				<div key={ element }>
+					<input type="radio" onClick={ () => this.selectFile(element) } name="files" id={ element } />
 					<label htmlFor={ element }>{ element }</label>
 				</div>
 			);
