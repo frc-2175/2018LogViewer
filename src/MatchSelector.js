@@ -1,7 +1,9 @@
 import React from 'react';
 import { getFolders } from './rioUtil';
 
-export default class MatchSlector extends React.Component {
+import "./matchSelector.scss"
+
+export default class MatchSelector extends React.Component {
 	state = {
 		matches: []
 	};
@@ -19,7 +21,7 @@ export default class MatchSlector extends React.Component {
 			return <option key={ element } value={ element }>{ element }</option>;
 		});
 		return (
-			<select onChange={ this.handleChange }>
+			<select onChange={ this.handleChange } className="match-selector">
 				{ matches }
 			</select>
 		);

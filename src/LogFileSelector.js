@@ -1,6 +1,8 @@
 import React from 'react';
 import { getFolders, getFiles } from './rioUtil';
 
+import "./logFileSelector.scss";
+
 export default class LogFileSelector extends React.Component {
 	state = {
 		files: []
@@ -18,14 +20,14 @@ export default class LogFileSelector extends React.Component {
 		let files = this.state.files;
 		files = files.map(element => {
 			return (
-				<div key={ element }>
+				<li key={ element }>
 					<input type="radio" onClick={ () => this.selectFile(element) } name="files" id={ element } />
 					<label htmlFor={ element }>{ element }</label>
-				</div>
+				</li>
 			);
 		});
 		return (
-			<ul>
+			<ul className="log-file-selector">
 				{ files }
 			</ul>
 		);

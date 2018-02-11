@@ -19,7 +19,7 @@ export default class LogViewer extends React.Component {
 	}
 
 	render() {
-		return <Chart title="LOL" data={ this.state.points } width={ 400 } height={ 300 } />;
+		return <Chart title="LOL" data={ this.state.points } width="100%" height="100%" />;
 	}
 
 	updateChart = () => {

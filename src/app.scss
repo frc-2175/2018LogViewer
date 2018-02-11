@@ -1,1 +1,31 @@
 @import "../node_modules/normalize-scss/sass/normalize/import-now";
+
+.app {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.sidebar, .viewer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.sidebar {
+  width: 200px;
+  left: 0;
+  background-color: #eee;
+  border-right: 1px solid #bbb;
+
+  .panel {
+    padding: 8px;
+  }
+}
+
+.viewer {
+  width: calc(100% - 200px);
+  right: 0;
+}
