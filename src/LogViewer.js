@@ -12,8 +12,8 @@ export default class LogViewer extends React.Component {
 		this.updateChart();
 	}
 
-	componentWillUpdate(nextProps, nextState) {
-		if(this.props.fileName != nextProps.fileName) {
+	componentDidUpdate(prevProps, prevState) {
+		if(this.props.fileName != prevProps.fileName) {
 			this.updateChart();
 		}
 	}
