@@ -1,11 +1,13 @@
 import React from 'react';
-import { getFolders, getFiles } from './rioUtil';
+import { getFolders, getFiles, getFile, getDataSets } from './rioUtil';
 
 import "./logFileSelector.scss";
 
 export default class LogFileSelector extends React.Component {
 	state = {
-		files: []
+		files: [],
+        folderName: "",
+        dataSets: []
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -26,21 +28,41 @@ export default class LogFileSelector extends React.Component {
 				</li>
 			);
 		});
+
+        let dataSets = this.state.dataSets;
+        dataSets.map(element => {
+            return <option key={ element } value={ element }>{ element }</option>;
+        });
+
 		return (
-			<ul className="log-file-selector">
-				{ files }
-			</ul>
+            <div>
+                <ul className="log-file-selector">
+                    { files }
+                </ul>
+                <select onChange={ this.handleChange }>
+                    { dataSets }
+                </select>
+            </div>
 		);
 	}
 
-	selectLogFolder(folderName) {
+    selectLogFolder = folderName => {
+        this.setState({folderName: folderName});
 		getFiles(folderName)
 			.then(files => {
 				this.setState({ files: files });
 			});
 	}
 
-	selectFile(file) {
+    selectFile = file => {
 		this.props.selectFile(file);
+        getFile(this.state.folderName, file)
+            .then(file => {
+                this.setState({ dataSets: getDataSets(file.split('\n')) });
+            });
 	}
+
+    handleChange = event => {
+       this.props.selectDataSet(event.target.value);
+    }
 }
