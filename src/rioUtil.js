@@ -2,7 +2,7 @@ import Axios from 'axios';
 
 const FAKE = false;
 
-Axios.defaults.baseURL = 'http://roborio-2175-frc.local';
+Axios.defaults.baseURL = 'http://roborio-2175-frc.local:7000';
 
 export function getFolders() {
   if (FAKE) {
@@ -75,15 +75,32 @@ export function getFile(folderName, fileName) {
       resolve(fakeData);
     });
   } else {
-    return Axios.get(`/${folderName}/${fileName}`)
+    return Axios.get(`/${folderName}/${fileName}`, { responseType: 'text' })
       .then(response => {
-        return response.data;
+        let data = response.data;
+	if (typeof data === 'object') {
+	  return JSON.stringify(object);
+	} else {
+	  return data;
+	}
       });
   }
 }
 
+export function getObjects(file) {
+    let lines = file.split('\n');
+    let objects = lines.map((element, index) => {
+	 try {
+	     return JSON.parse(element);
+	 } catch(e) { 
+	     return null;
+	 }
+    });
+    return objects.filter(element => element !== null);
+}
+
 export function getDataSets(file) {
-    let objects = file.map(element => JSON.parse(element));
+    let objects = getObjects(file);
     let sets = [];
     for(let value in objects[0].values) {
         sets.push(value);

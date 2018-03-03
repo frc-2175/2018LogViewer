@@ -1,6 +1,6 @@
 import React from 'react';
 import Chart from './Chart';
-import { getFile } from './rioUtil';
+import { getFile, getObjects } from './rioUtil';
 
 export default class LogViewer extends React.Component {
 	state = {
@@ -25,10 +25,9 @@ export default class LogViewer extends React.Component {
 	updateChart = () => {
 		getFile(this.props.folderName, this.props.fileName)
 			.then(file => {
-				let lines = file.split('\n');
-				let objects = lines.map(element => JSON.parse(element));
+				let objects = getObjects(file);
+				
 				let points = objects.map(element => {
-					console.log('x: ' + element.timestamp + ', y: ' + element.values[this.props.dataSet]);
 					return { x: element.timestamp, y: element.values[this.props.dataSet] };
 				});
 				this.setState({ points: points });

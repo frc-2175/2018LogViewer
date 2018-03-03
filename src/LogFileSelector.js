@@ -39,13 +39,18 @@ export default class LogFileSelector extends React.Component {
                 <ul className="log-file-selector">
                     { files }
                 </ul>
-                <select onChange={ this.selectDataSet }>
+                <select onChange={ event => this.selectDataSet(event.target.value) }>
                     { dataSets }
                 </select>
             </div>
 		);
 	}
 
+	componentWillUpdate(nextProps, nextState) {
+		if(this.state.dataSets != nextState.dataSets) {
+			this.selectDataSet(nextState.dataSets[0]);
+		}
+	}
     selectLogFolder = folderName => {
         this.setState({folderName: folderName});
 		getFiles(folderName)
@@ -58,11 +63,11 @@ export default class LogFileSelector extends React.Component {
 		this.props.selectFile(file);
         getFile(this.state.folderName, file)
             .then(file => {
-                this.setState({ dataSets: getDataSets(file.split('\n')) });
+                this.setState({ dataSets: getDataSets(file) });
             });
 	}
 
-    selectDataSet = event => {
-       this.props.selectDataSet(event.target.value);
+    selectDataSet = dataSet => {
+       this.props.selectDataSet(dataSet);
     }
 }
