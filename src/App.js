@@ -16,7 +16,8 @@ function SidebarPanel(props) {
 class App extends React.Component {
 	state = {
 		match: 1,
-		file: ""
+		file: "",
+        dataSet: ""
 	};
 
   render() {
@@ -27,11 +28,11 @@ class App extends React.Component {
   	       <MatchSelector selectMatch={ this.selectMatch } />
           </SidebarPanel>
   	      <SidebarPanel>
-            <LogFileSelector folderName={ this.state.match } selectFile={ this.selectFile } />
+            <LogFileSelector folderName={ this.state.match } selectFile={ this.selectFile } selectDataSet={ this.selectDataSet } />
           </SidebarPanel>
   	    </div>
         <div className="viewer">
-          <LogViewer fileName={ this.state.file } folderName={ this.state.match } />
+          <LogViewer fileName={ this.state.file } folderName={ this.state.match } dataSet={ this.state.dataSet } />
         </div>
       </div>
     );
@@ -44,6 +45,10 @@ class App extends React.Component {
   selectFile = file => {
   	this.setState({ file: file});
   }
+
+    selectDataSet = dataSet => {
+        this.setState({ dataSet: dataSet});
+    }
 }
 
 export default App;
