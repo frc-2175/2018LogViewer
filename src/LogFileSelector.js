@@ -30,7 +30,7 @@ export default class LogFileSelector extends React.Component {
 		});
 
         let dataSets = this.state.dataSets;
-        dataSets.map(element => {
+        dataSets = dataSets.map(element => {
             return <option key={ element } value={ element }>{ element }</option>;
         });
 
@@ -39,7 +39,7 @@ export default class LogFileSelector extends React.Component {
                 <ul className="log-file-selector">
                     { files }
                 </ul>
-                <select onChange={ this.handleChange }>
+                <select onChange={ this.selectDataSet }>
                     { dataSets }
                 </select>
             </div>
@@ -62,7 +62,7 @@ export default class LogFileSelector extends React.Component {
             });
 	}
 
-    handleChange = event => {
+    selectDataSet = event => {
        this.props.selectDataSet(event.target.value);
     }
 }

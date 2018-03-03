@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-const FAKE = true;
+const FAKE = false;
 
 Axios.defaults.baseURL = 'http://roborio-2175-frc.local';
 
@@ -60,7 +60,7 @@ export function getFile(folderName, fileName) {
       break
     default:
       values = [[0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0]];
-      names = ["none", "none"];
+      names = ["none", "stuff"];
       break;
   }
 
